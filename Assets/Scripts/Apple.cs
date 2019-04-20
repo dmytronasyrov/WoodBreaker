@@ -23,7 +23,33 @@ public class Apple : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        _direction = Vector3.Reflect(_direction, collision.contacts[0].normal);
-        _direction.Normalize();
+        ColliderCreator colliderCreator = collision.gameObject.GetComponent<ColliderCreator>();
+        Platform platform = collision.gameObject.GetComponent<Platform>();
+        Vector2 normal = collision.contacts[0].normal;
+        bool isGameOver = false;
+
+        if (colliderCreator != null && normal == Vector2.up)
+        {
+            isGameOver = true;
+        } 
+        else if (platform && normal != Vector2.up)
+        {
+            isGameOver = true;
+        }
+        else if (!colliderCreator && !platform)
+        {
+            Destroy(collision.gameObject);
+        }
+
+        if (isGameOver)
+        {
+            GameManager.GameOver();
+            GameManager.points++;
+        }
+        else
+        {
+            _direction = Vector3.Reflect(_direction, collision.contacts[0].normal);
+            _direction.Normalize();
+        }
     }
 }
