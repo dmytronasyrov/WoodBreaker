@@ -6,11 +6,13 @@ public class Platform : MonoBehaviour
 {
 
     public float velocity;
-    public float limitOnX;
+    private float _limitOnX;
 
     void Start()
     {
-    
+        Camera cam = Camera.main;
+        float platformWidth = GetComponent<SpriteRenderer>().bounds.extents.x;
+        _limitOnX = cam.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x - platformWidth;
     }
 
     void Update()
@@ -28,7 +30,7 @@ public class Platform : MonoBehaviour
         Transform t = GetComponent<Transform>();
         t.position = t.position + (Vector3.right * movement * velocity * Time.deltaTime);
         float currX = t.position.x;
-        currX = Mathf.Clamp(currX, -limitOnX, limitOnX);
+        currX = Mathf.Clamp(currX, -_limitOnX, _limitOnX);
         t.position = new Vector3(currX, t.position.y, t.position.z);
     }
 }

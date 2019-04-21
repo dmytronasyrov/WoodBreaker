@@ -6,6 +6,7 @@ public class Apple : MonoBehaviour
 {
 
     public float velocity = 1;
+    public GameObject woodParticle, leavesParticle;
     private Vector3 _direction;
 
     void Start()
@@ -32,19 +33,33 @@ public class Apple : MonoBehaviour
         {
             isGameOver = true;
         } 
-        else if (platform && normal != Vector2.up)
+        else if (platform)
         {
-            isGameOver = true;
+            leavesParticle.transform.position = platform.transform.position;
+            leavesParticle.GetComponent<ParticleSystem>().Play();
+
+            if (normal != Vector2.up)
+            {
+                isGameOver = true;
+            }
         }
         else if (!colliderCreator && !platform)
         {
+            SpriteRenderer renderer = collision.gameObject.GetComponent<SpriteRenderer>();
+            Vector3 woodenPlankPos = collision.gameObject.transform.position;
+            Vector3 particleInitPos = new Vector3(woodenPlankPos.x + renderer.bounds.extents.x, woodenPlankPos.y - renderer.bounds.extents.y, -1);
+
+            GameObject particle = (GameObject) Instantiate(woodParticle, particleInitPos, Quaternion.identity);
+            ParticleSystem particleSystem = particle.GetComponent<ParticleSystem>();
+
             Destroy(collision.gameObject);
+            Destroy(particle, particleSystem.startLifetime + particleSystem.duration);
+            GameManager.points++;
         }
 
         if (isGameOver)
         {
             GameManager.GameOver();
-            GameManager.points++;
         }
         else
         {
