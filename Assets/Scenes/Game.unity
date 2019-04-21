@@ -469,6 +469,7 @@ GameObject:
   - component: {fileID: 1519242920}
   - component: {fileID: 1519242922}
   - component: {fileID: 1519242923}
+  - component: {fileID: 1519242924}
   m_Layer: 0
   m_Name: Leaves Bush
   m_TagString: Untagged
@@ -577,6 +578,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10.81, y: 4.15}
   m_EdgeRadius: 0
+--- !u!95 &1519242924
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1519242919}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ef2c6bb40124249148247f40ee4a4e6b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1547451325 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9161260519459681785, guid: 9707beffb583c4ad0b99f7757d20f1ce,

@@ -38,6 +38,8 @@ public class Apple : MonoBehaviour
             leavesParticle.transform.position = platform.transform.position;
             leavesParticle.GetComponent<ParticleSystem>().Play();
 
+            platform.GetComponent<Animator>().SetTrigger("isCollidingApple");
+
             if (normal != Vector2.up)
             {
                 isGameOver = true;
